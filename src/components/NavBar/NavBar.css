@@ -1,0 +1,21 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    background-color: #4BCCDE;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.button-cont{
+    display: flex;
+    padding-right: 30px;
+    justify-content: flex-end;
+    gap: 10px;
+    
+}
+
+.HeadName{
+    display: flex;
+    padding-left: 30px;
+}
