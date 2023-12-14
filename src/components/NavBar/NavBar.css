@@ -1,7 +1,7 @@
 .navbar{
     display: flex;
     flex-direction: row;
-    background-color: #4BCCDE;
+    background-color: var(--product-card-background);
     align-items: center;
     justify-content: space-between;
     
