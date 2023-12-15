@@ -1,0 +1,20 @@
+.Weather-cont{
+    background-color: #4BCCDE;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    align-items: center;
+    padding: 30px;
+    max-width: 50%;
+    
+}
+
+.diff-weather{
+    background-color: #E5EEEB;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px;
+    
+}
+
