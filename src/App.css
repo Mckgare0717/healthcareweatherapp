@@ -13,9 +13,56 @@
   --text-color: #000000;
   --on-image-color: #f1fce9;
   --background-color: #E5EEEB;
-  --product-card-background: #4BCCDE;
+  --product-card-background: ;
   --accent-color: #27dd8b;
   --primary-color: #3de145;
   --on-primary-color: #272727;
   --secondary-color: #27dd8b;
+}
+
+.text-display{
+  font-family: "Roboto", sans-serif;
+  font-size: 57px;
+  font-weight: 800;
+  letter-spacing: -2%;
+  line-height: 64px;
+}
+.text-headline{
+  font-family: "Roboto", sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 0%;
+  line-height: 53px;
+}
+.text-title{
+  font-family: "Roboto", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0%;
+  line-height: 53px;
+}
+.text-body{
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 4%;
+  line-height: 32px;
+}
+.text-label{
+  font-family: "Roboto", sans-serif;
+  font-size: 14;
+  font-weight: 400;
+  letter-spacing: 1%;
+  line-height: 27px;
+  &.prominent{
+    font-weight: 700;
+  }
+}
+
+
+#App{
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  text-align: center;
 }

@@ -1,5 +1,6 @@
 import "./NavBar.css"
 import NavBtn from "../NavButtons/NavBtn";
+import ToggleBtn from "../ToggleBtn/ToggleBtn";
 
 const NavBar = () => {
     return (
@@ -12,7 +13,7 @@ const NavBar = () => {
                     <NavBtn text="Home" link="/home"/>
                     <NavBtn text="Blog" link="/blog"/>
                     <NavBtn text="Weather" link="/weather"/>
-                    
+                    <ToggleBtn/>
                 </div>
             </div>
         </header>
