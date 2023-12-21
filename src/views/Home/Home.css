@@ -2,10 +2,12 @@
     background-color: #4BCCDE;
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 40%;
     align-items: center;
     padding: 30px;
-    max-width: 50%;
+    margin-left: 30px;
+    margin-top: 50px;
+    
     
 }
 
@@ -13,8 +15,25 @@
     background-color: #E5EEEB;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     padding: 10px;
+    border-radius: 30px;
+
+    & h4{
+        margin: 0;
+    }
+    
+    &.active{
+        background-color: #E5EEEB;
+    }
+
+}
+
+.weather-cont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
     
 }
 
