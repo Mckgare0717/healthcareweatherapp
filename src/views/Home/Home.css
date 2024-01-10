@@ -1,39 +1,64 @@
-.Weather-cont{
-    background-color: #4BCCDE;
+
+.weatherHealth-cont{
     display: flex;
-    flex-direction: column;
-    width: 40%;
+    flex-direction: row;
+    height: 30%;
+    justify-content: center;
     align-items: center;
-    padding: 30px;
-    margin-left: 30px;
-    margin-top: 50px;
-    
-    
+    border: 10px solid red;
 }
 
-.diff-weather{
+.currentWeather{
+    background-color: #4BCCDE;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-left: 30px;
+    flex-wrap: wrap;
+}
+
+
+.info-cont{
     background-color: #E5EEEB;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 10px;
-    border-radius: 30px;
+    margin-bottom: 10px;
+    padding: 30px;
+}
 
-    & h4{
+.healthCont{
+    background-color: #4BCCDE;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 70%;
+    padding: 30px;
+    margin-left: 30%;
+    flex-wrap: wrap;
+    
+    & h2{
         margin: 0;
     }
-    
-    &.active{
-        background-color: #E5EEEB;
-    }
 
 }
 
-.weather-cont{
+.components-cont{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    gap: 4px;
-    
+    background-color: #E5EEEB;
+    padding: 30px;
+    gap: 10px;
 }
 
+.current-cont{
+    border: 10px solid red;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 30px;
+}

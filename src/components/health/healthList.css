@@ -1,0 +1,43 @@
+.Health-cont{
+    background-color: #4BCCDE;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    margin-top: 50px;
+    margin-left: 0%;
+}
+
+
+.diff-health{
+    background-color: #E5EEEB;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+
+    & h4{
+        margin: 0;
+    }
+    
+    &.active{
+        background-color: #E5EEEB;
+    }
+}
+
+.health-cont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+
+.trigger-btn{
+    background-color: #4BCCDE;
+    border: none;
+    border-radius: 10px;
+}

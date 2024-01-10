@@ -1,168 +1,129 @@
 import "./Home.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import WeatherList from "../../components/weather/WeatherList";
+import HealthList from "../../components/health/HealthList";
+
+
 
 const Home = () => {
-  const API_KEY = "f38da1927783f2c2f89896fd09011d11";
+  
+  const [weatherData, setWeatherData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [health,setHealth] = useState(null) 
 
-  const [weather, setWeather] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [health, setHealth] = useState([])
+  useEffect(() => {
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            getWeatherData(latitude, longitude);
+            getHealthData(latitude,longitude)
+          },
+          (error) => {
+            setError("Error getting location: " + error.message);
+            setLoading(false);
+          }
+        );
+      } else {
+        setError("Geolocation is not supported by your browser");
+        setLoading(false);
+      }
+    };
 
+    const getWeatherData = async (latitude, longitude) => {
+      const API_KEY = "f38da1927783f2c2f89896fd09011d11";
+      const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
 
-  const locationsList = [
-    {
-      "location": "London",
-      "latitude": 51.509865,
-      "longitude": -0.118092
-    },
-    {
-      "location": "Manchester",
-      "latitude": 53.483959,
-      "longitude": -2.244644
-    },
-    {
-      "location": "Edinburgh",
-      "latitude": 55.953251,
-      "longitude": -3.188267
-    },
-    {
-      "location": "Birmingham",
-      "latitude": 52.4862,
-      "longitude": -1.8904
-    },
-    {
-      "location": "Glasgow",
-      "latitude": 55.8642,
-      "longitude": -4.2518
-    },
-    {
-      "location": "Bristol",
-      "latitude": 51.4545,
-      "longitude": -2.5879
-    },
-    {
-      "location": "Cardiff",
-      "latitude": 51.4816,
-      "longitude": -3.1791
-    },
-    {
-      "location": "Liverpool",
-      "latitude": 53.4084,
-      "longitude": -2.9916
-    },
-    {
-      "location": "Oxford",
-      "latitude": 51.7520,
-      "longitude": -1.2577
-    },
-    {
-      "location": "Cambridge",
-      "latitude": 52.2053,
-      "longitude": 0.1218
-    }
-  ]
-  function getWeather() {
-    setIsLoading(true);
-
-    Promise.all(
-      locationsList.map((location) =>
-        axios
-          .get(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}`
-          )
-          .then((res) => res.data)
-          .catch((error) => {
-            console.error("Error fetching weather data:", error);
-            return null;
-          })
-      )
-    )
-      .then((data) => {
-        setWeather(data.filter((item) => item !== null));
-
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      try {
+        const response = await axios.get(API_URL);
+        setWeatherData(response.data);
+      } catch (error) {
+        setError("Error fetching weather data: " + error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
 
-  }
+    const getHealthData = async (latitude,longitude)=>{
+      const API_KEY = "f38da1927783f2c2f89896fd09011d11";
+      const API_URL = `http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
 
-  function getHealth() {
-    setIsLoading(true);
+      try {
+        const response = await axios.get(API_URL);
+        setHealth(response.data);
+      } catch (error) {
+        setError("Error fetching weather data: " + error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    
+    getLocation();
+  }, []); 
 
-    Promise.all(
-      locationsList.map((location) =>
-        axios
-          .get(
-            `http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}`
-          )
-          .then((res) => ({ location, health: res.data }))
-          .catch((error) => {
-            console.error("Error fetching weather data:", error);
-            return null;
-          })
-      )
-    )
-      .then((data) => {
-        setHealth(data.filter((item) => item !== null));
-
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-
-
-  }
-
-
-  console.log(weather)
-  console.log(health[0].health.list[0].main.aqi)
-
-
-
-  if (isLoading) {
-    return <h3>Loading.....</h3>;
-  }
-
+console.log(weatherData)
+console.log(health)
   return (
     <div className="main-cont">
 
-
+    
       Welcome to Home page
-      <div className="Weather-cont">
-        <h2>Weather</h2>
-
-        <button onClick={() => getWeather()}>Test</button>
-        <div className="weather-cont">
-          {weather.map((location) => (
-            <div className="diff-weather active" key={location.id}>
-              <h4>{location.name}</h4>
-              <h4>Temp:{location.main.temp}</h4>
-              <h4>{location.weather[0].description}</h4>
-              <img src={`https://openweathermap.org/img/wn/${location.weather[0].icon}@2x.png`} alt={location.weather[0].description} />
-            </div>
-          ))}
+      <div className="current-cont">
+      <div className="weatherMain-cont">
+      {loading && <p>Loading...</p>}
+      
+      {weatherData && (
+        <div className="currentWeather">
+          <h2>Current Weather</h2>
+          <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt={weatherData.weather[0].description} />
+          <div className="info-cont">
+          <p>Location: {weatherData.name}</p>
+          <p>Temperature: {weatherData.main.temp} °C</p>
+          <p>Weather: {weatherData.weather[0].description}</p>
+          </div>
         </div>
-      </div>
+      )}
+    </div>
 
-      <div className="Health-cont">
-        <h2>Health</h2>
+        <div className="healthMain-cont">
+          {health && (
+            <div className="healthCont">
+            <h1>Air Quality</h1>
+                <h2>Location: {weatherData.name}</h2>
+                <h2>AQI: {health.list[0].main.aqi}</h2>
+                <h3>Components in the air:</h3>
+                <div className="components-cont">
+                <h4>co: {health.list[0].components.co}</h4>
+                <h4>nh3: {health.list[0].components.nh3}</h4>
+                <h4>no: {health.list[0].components.no}</h4>
+                <h4>o3: {health.list[0].components.o3}</h4>
+                <h4>pm25: {health.list[0].components.pm2_5}</h4>
+                <h4>pm10: {health.list[0].components.pm10}</h4>
+                <h4>so2: {health.list[0].components.so2}</h4>
+                </div>
+                
 
-        <button onClick={() => getHealth()}>Test</button>
-
-        <div className="health-cont">
-          {health.map(({ healths, location }) => (
-            <div className="diff-health active" >
-              
-              <h4>{location.location}</h4>
-              <h4>Aqi: {healths.list[0].main.aqi}</h4>
-              
             </div>
-          ))}
+          )
+
+          }
         </div>
+        </div>
+      <div className="weatherHealth-cont">
+      <WeatherList/>
+      <HealthList/>
       </div>
+      
+        
+        
+      
     </div>
   );
 };
