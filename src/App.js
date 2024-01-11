@@ -4,6 +4,7 @@ import NavBar from './components/NavBar/NavBar';
 import Home from "./views/Home/Home.js"
 import Blog from './views/BlogPage/Blog.js';
 import Weather from './views/Weather/Weather.js';
+import LoginForm from './views/Forms/LoginForm.js';
 
 
 
@@ -15,6 +16,7 @@ function App() {
         <Route exact path='/' element={<Home />}/>
         <Route exact path='/blog' element={<Blog/>}/>
         <Route exact path="/weather" element={<Weather />}/>
+        <Route exact path="/login" element={<LoginForm/>}/>
       </Routes>
     </div>
   );

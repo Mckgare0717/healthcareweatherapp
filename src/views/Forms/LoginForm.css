@@ -1,0 +1,23 @@
+.form-cont{
+    background-color: #4BCCDE;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 30px;
+
+    & button{
+        
+        border: none;
+        background: none;
+    }
+}
+
+body{
+    background-image: url("../../assets/asset1.jpg");
+    
+
+}
+

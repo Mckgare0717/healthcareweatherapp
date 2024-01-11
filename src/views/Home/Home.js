@@ -2,7 +2,7 @@ import "./Home.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Popup from 'reactjs-popup';
-import { BookA } from 'lucide-react';
+import { BookA, Thermometer } from 'lucide-react';
 import { MapPin } from 'lucide-react';
 import { SprayCan } from 'lucide-react';
 import { Component } from 'lucide-react';
@@ -87,9 +87,9 @@ const Home = () => {
           <h2>Current Weather</h2>
           <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt={weatherData.weather[0].description} />
           <div className="info-cont">
-          <p>Location: {weatherData.name}</p>
-          <p>Temperature: {weatherData.main.temp} °C</p>
-          <p>Weather: {weatherData.weather[0].description}</p>
+          <p><MapPin/>: {weatherData.name}</p>
+          <p><Thermometer/>: {weatherData.main.temp} °C</p>
+          <p><BookA/>: {weatherData.weather[0].description}</p>
           </div>
         </div>
       )}
@@ -99,9 +99,9 @@ const Home = () => {
           {health && (
             <div className="healthCont">
             <h1>Air Quality</h1>
-                <h2>Location: {weatherData.name}</h2>
-                <h2>AQI: {health.list[0].main.aqi}</h2>
-                <h3>Components in the air:</h3>
+                <h2><MapPin/>: {weatherData.name}</h2>
+                <h2><SprayCan/>: {health.list[0].main.aqi}</h2>
+                <h3><Component/>:</h3>
                 <div className="components-cont">
                 <h4>co: {health.list[0].components.co}</h4>
                 <h4>nh3: {health.list[0].components.nh3}</h4>
