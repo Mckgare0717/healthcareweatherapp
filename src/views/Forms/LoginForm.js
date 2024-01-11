@@ -9,25 +9,36 @@ const LoginForm = () => {
                 <div class="signup">
                     <form>
                         <label for="chk" aria-hidden="true">Sign up</label>
-                        <input type="text" name="txt" placeholder="User name" required="">
-                            <input type="email" name="email" placeholder="Email" required="">
-                                <input type="password" name="pswd" placeholder="Password" required="">
-                                    <button>Sign up</button>
+                        <input type="text" name="txt" placeholder="User name" required=""/>
+                            <input type="email" name="email" placeholder="Email" required=""/>
+                                <input type="password" name="pswd" placeholder="Password" required=""/>
+                                    <button className="auth-btn">Sign up</button>
                                 </form>
                             </div>
 
                             <div class="login">
-                                <form>
+                                <form className="loginForm">
                                     <label for="chk" aria-hidden="true">Login</label>
-                                    <input type="email" name="email" placeholder="Email" required="">
-                                        <input type="password" name="pswd" placeholder="Password" required="">
-                                            <button>Login</button>
+                                    <input type="email" name="email" placeholder="Email" required=""/>
+                                        <input type="password" name="pswd" placeholder="Password" required=""/>
+                                            <button className="auth-btn">Login</button>
                                         </form>
                                     </div>
                             </div>
                         </div>
                         
-                        {/* <div className="form-cont">
+                  
+
+
+                        )
+}
+
+export default LoginForm;
+
+
+
+
+      {/* <div className="form-cont">
             <form>
                 <h2>Sign In</h2>
                 <label htmlFor="email">Email: </label>
@@ -37,9 +48,3 @@ const LoginForm = () => {
                 <button onClick={() => {alert("You have logged in")}}>Submit</button>
             </form>
         </div> */}
-
-
-                        )
-}
-
-                        export default LoginForm;
