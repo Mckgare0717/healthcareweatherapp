@@ -1,8 +1,10 @@
 import "./healthList.css"
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { SprayCan } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 const HealthList = ()=>{
     const API_KEY = "f38da1927783f2c2f89896fd09011d11";
@@ -90,7 +92,9 @@ const HealthList = ()=>{
 
   }
 
-
+  useEffect(()=>{
+    getHealth()
+  },[])
 
 
   if (isLoading) {
@@ -98,17 +102,20 @@ const HealthList = ()=>{
   }
 
     return(
-        <div>
-            <div className="Health-cont">
+
+          <div className="Health-cont">
           <h2>Air Quality</h2>
 
-          <button onClick={() => getHealth()}>Test</button>
+          {/* <button onClick={() => getHealth()}>Test</button> */}
 
           <div className="health-cont">
             {health.map(({ location, health }) => (
               <div className="diff-health active" key={location.location}>
-                <h4>{location.location}</h4>
+                <h4><MapPin/>:{location.location}</h4>
+                <div className="aqi">
+                <SprayCan/>
                 <h4>Aqi: {health.list[0].main.aqi}</h4>
+                </div>
                 <Popup trigger={<button className="trigger-btn">View Components</button>} position="right center">
                   <div className="health-popup">
                   <h4>Components: </h4>
@@ -136,7 +143,6 @@ const HealthList = ()=>{
               </div>
             ))}
           </div>
-        </div>
         </div>
     )
 }

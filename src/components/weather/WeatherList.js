@@ -1,6 +1,9 @@
 import "./WeatherList.css"
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Thermometer } from 'lucide-react';
+import { BookA } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 const WeatherList = () => {
     const API_KEY = "f38da1927783f2c2f89896fd09011d11";
 
@@ -87,27 +90,30 @@ const WeatherList = () => {
 
     }
 
+    useEffect(()=>{
+        getWeather()
+    },[])
+
     if (isLoading) {
         return <h3>Loading.....</h3>;
       }
     return (
-        <div>
+
             <div className="Weather-cont">
 
                 <h2>Weather</h2>
-                <button onClick={() => getWeather()}>Test</button>
+                {/* <button onClick={() => getWeather()}>Test</button> */}
                 <div className="weather-cont">
                     {weather.map((location) => (
                         <div className="diff-weather active" key={location.id}>
-                            <h4>{location.name}</h4>
-                            <h4>Temp:{location.main.temp}°C</h4>
-                            <h4>{location.weather[0].description}</h4>
+                            <h4><MapPin/>:{location.name}</h4>
+                            <h4 className="temp"><Thermometer/>: {location.main.temp}°C</h4>
+                            <h4><BookA/>:{location.weather[0].description}</h4>
                             <img src={`https://openweathermap.org/img/wn/${location.weather[0].icon}@2x.png`} alt={location.weather[0].description} />
                         </div>
                     ))}
                 </div>
             </div>
-        </div>
     )
 }
 

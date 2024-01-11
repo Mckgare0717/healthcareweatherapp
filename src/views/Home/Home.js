@@ -2,6 +2,10 @@ import "./Home.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Popup from 'reactjs-popup';
+import { BookA } from 'lucide-react';
+import { MapPin } from 'lucide-react';
+import { SprayCan } from 'lucide-react';
+import { Component } from 'lucide-react';
 import 'reactjs-popup/dist/index.css';
 import WeatherList from "../../components/weather/WeatherList";
 import HealthList from "../../components/health/HealthList";
@@ -68,8 +72,7 @@ const Home = () => {
     getLocation();
   }, []); 
 
-console.log(weatherData)
-console.log(health)
+
   return (
     <div className="main-cont">
 

@@ -3,9 +3,10 @@
     display: flex;
     flex-direction: row;
     height: 30%;
+    width: 100%;
     justify-content: center;
     align-items: center;
-    border: 10px solid red;
+    
 }
 
 .currentWeather{
@@ -55,7 +56,7 @@
 }
 
 .current-cont{
-    border: 10px solid red;
+    
     display: flex;
     flex-direction: row;
     justify-content: center;
