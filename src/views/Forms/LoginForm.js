@@ -1,6 +1,30 @@
+import { useState } from "react";
 import "./LoginForm.css"
+import axios from "axios";
 
 const LoginForm = () => {
+
+    const [name,setName] = useState("")
+    const [password, setPassword] = useState("");
+    const [email,setEmail] = useState("")
+
+    const loginForm = (e)=>{
+        e.preventDefault();
+        const sendData = {
+            name:name,
+            password:password
+        } 
+        axios.post("http://localhost:8000/login", sendData).then((res)=>{
+            console.log(res)
+
+            localStorage.setItem("token",res.data.access_token)
+            localStorage.setItem("id",res.data.id)
+
+        })
+
+
+    }
+
     return (
         <div className="login-cont">
             <div class="main">
@@ -19,8 +43,8 @@ const LoginForm = () => {
                             <div class="login">
                                 <form className="loginForm">
                                     <label for="chk" aria-hidden="true">Login</label>
-                                    <input type="email" name="email" placeholder="Email" required=""/>
-                                        <input type="password" name="pswd" placeholder="Password" required=""/>
+                                    <input type="email" name="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)}/>
+                                        <input type="password" name="pswd" placeholder="Password" required="" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                                             <button className="auth-btn">Login</button>
                                         </form>
                                     </div>
