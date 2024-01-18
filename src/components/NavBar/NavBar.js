@@ -3,19 +3,35 @@ import NavBtn from "../NavButtons/NavBtn";
 import ToggleBtn from "../ToggleBtn/ToggleBtn";
 import { AuthContext } from "../ActionContext/ActionContext";
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
 
-    const {user} = useContext(AuthContext)
-    const navigate = Navigate()
+    const {token,setToken,setUser} = useContext(AuthContext)
+    const navigate = useNavigate()
 
-    function isLoggedOut(){
-        localStorage.removeItem("user")
-        localStorage.removeItem("token")
-        alert("you are logged out")
-        navigate("/home")
+
+    const LogoutBtn=()=>{
+        function isLoggedOut(){
+            
+            localStorage.removeItem("user")
+            localStorage.removeItem("token")
+            setToken(null)
+            setUser(null)
+            alert("you are now logged out")
+            navigate("/")
+            
+        }
+
+
+        if (token){
+            return(
+                <button onClick={isLoggedOut} className="logoutbtn">Sign Out</button>
+            )
+        }
+
     }
+    
 
     return (
         <header>
@@ -27,9 +43,10 @@ const NavBar = () => {
                     <NavBtn text="Home" link="/"/>
                     <NavBtn text="Blog" link="/blog"/>
                     <NavBtn text="Weather" link="/weather"/>
-                    {user ? <NavBtn text="Profile" link="/profile"/>: null}
+                    {token ? <NavBtn text="Profile" link="/profile"/>: null}
                     <div className="cont-btn">
-                    {!user?<NavBtn text="Sign In" link="/login"/>:<NavBtn text="Sign Out" link={isLoggedOut()}/>}
+                    {token === null &&<NavBtn text="SignIn/Signup" link="/login"/>}
+                    <LogoutBtn/>
                     </div>
                     <ToggleBtn/>
                 </div>
