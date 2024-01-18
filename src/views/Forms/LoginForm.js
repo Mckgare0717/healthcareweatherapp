@@ -25,7 +25,7 @@ const LoginForm = () => {
             setUser(res.data)
             setToken(res.data.access_token)
             localStorage.setItem("token",res.data.access_token)
-            localStorage.setItem("id",res.data.id)
+            localStorage.setItem("user",res.data)
             navigate("/")
         }).catch((error) =>{
             alert(error.response.data.detail)})
@@ -47,7 +47,7 @@ const LoginForm = () => {
             setUser(res.data)
             setToken(res.data.access_token)
             localStorage.setItem("token",res.data.access_token)
-            localStorage.setItem("id",res.data.id)
+            localStorage.setItem("user",res.data)
             navigate("/")
         }).catch((error) =>{
             alert(JSON.stringify(error.response.data.detail))})

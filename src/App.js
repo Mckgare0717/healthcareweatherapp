@@ -6,12 +6,14 @@ import Blog from './views/BlogPage/Blog.js';
 import Weather from './views/Weather/Weather.js';
 import LoginForm from './views/Forms/LoginForm.js';
 import ProfilePage from './views/Profile/Profile.js';
+import { AuthContext } from './components/ActionContext/ActionContext.js';
+import { useContext } from 'react';
 
 
 
 function App() {
 
-  
+  const {user} = useContext(AuthContext)
 
   function isLoggedIn(){
     return false
@@ -25,7 +27,7 @@ function App() {
         <Route exact path='/blog' element={<Blog/>}/>
         <Route exact path="/weather" element={<Weather />}/>
         <Route exact path="/login" element={<LoginForm/>}/>
-        <Route exact path='/profile' element={isLoggedIn() ? <ProfilePage/> : <Navigate to={"/login"}/>}/>
+        <Route exact path='/profile' element={user ? <ProfilePage/> : <Navigate to={"/login"}/>}/>
       </Routes>
     </div>
   );

@@ -10,6 +10,7 @@ import 'reactjs-popup/dist/index.css';
 import WeatherList from "../../components/weather/WeatherList";
 import HealthList from "../../components/health/HealthList";
 import { AuthContext } from "../../components/ActionContext/ActionContext";
+import { json } from "react-router-dom";
 
 
 
@@ -79,7 +80,7 @@ const Home = () => {
     <div className="main-cont">
 
     
-      Welcome to {JSON.stringify(user)}
+      {user ? user.name: null}
       <div className="current-cont">
       <div className="weatherMain-cont">
       {loading && <p>Loading...</p>}
