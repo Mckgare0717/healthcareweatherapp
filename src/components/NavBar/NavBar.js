@@ -13,8 +13,9 @@ const NavBar = () => {
                     <NavBtn text="Home" link="/"/>
                     <NavBtn text="Blog" link="/blog"/>
                     <NavBtn text="Weather" link="/weather"/>
-                    <div className="auth-btn">
-                        <NavBtn text="Sign In" link="/login"/>
+                    
+                    <div className="cont-btn">
+                    <NavBtn text="Sign In" link="/login"/>
                     </div>
                     <ToggleBtn/>
                 </div>

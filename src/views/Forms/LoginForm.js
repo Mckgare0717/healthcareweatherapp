@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./LoginForm.css"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../components/ActionContext/ActionContext";
 
 const LoginForm = () => {
 
@@ -10,6 +11,8 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [email,setEmail] = useState("")
     const [error,setError] = useState("")
+    const {setUser,setToken} = useContext(AuthContext)
+
 
     const loginForm = (e)=>{
         e.preventDefault();
@@ -19,6 +22,8 @@ const LoginForm = () => {
         } 
         axios.post("http://localhost:8000/users/login", sendData).then((res)=>{
             console.log("getting data")
+            setUser(res.data)
+            setToken(res.data.access_token)
             localStorage.setItem("token",res.data.access_token)
             localStorage.setItem("id",res.data.id)
             navigate("/")
@@ -39,6 +44,8 @@ const LoginForm = () => {
         } 
         axios.post("http://localhost:8000/users/register", sendData).then((res)=>{
             console.log("getting sent")
+            setUser(res.data)
+            setToken(res.data.access_token)
             localStorage.setItem("token",res.data.access_token)
             localStorage.setItem("id",res.data.id)
             navigate("/")
@@ -54,7 +61,7 @@ const LoginForm = () => {
 
                 <div class="signup">
                     <form onSubmit={regForm}>
-                        <label for="chk" aria-hidden="true">Register</label>
+                        <label className="label-cont" for="chk" aria-hidden="true">Register</label>
                         <input type="text" name="txt" placeholder="Name" required value={name} onChange={(e)=>setName(e.target.value)}/>
                             <input type="email" name="email" placeholder="Email" required value={email} onChange={(e)=>setEmail(e.target.value)}/>
                                 <input type="password" name="pswd" placeholder="Password" required value={password} onChange={(e)=>setPassword(e.target.value)}/>
@@ -64,7 +71,7 @@ const LoginForm = () => {
 
                             <div class="login">
                                 <form className="loginForm" onSubmit={loginForm}>
-                                    <label for="chk" aria-hidden="true">Login</label>
+                                    <label className="label-cont" for="chk" aria-hidden="true">Login</label>
                                     <input type="email" name="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)}/>
                                         <input type="password" name="pswd" placeholder="Password" required="" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                                             <button className="auth-btn" type="submit">Login</button>
@@ -84,13 +91,4 @@ export default LoginForm;
 
 
 
-      {/* <div className="form-cont">
-            <form>
-                <h2>Sign In</h2>
-                <label htmlFor="email">Email: </label>
-                <input type="text" id="email"/><br/>
-                <label htmlFor="password">Password: </label>
-                <input type="password" id="password"/><br/>
-                <button onClick={() => {alert("You have logged in")}}>Submit</button>
-            </form>
-        </div> */}
+      

@@ -5,10 +5,18 @@ import Home from "./views/Home/Home.js"
 import Blog from './views/BlogPage/Blog.js';
 import Weather from './views/Weather/Weather.js';
 import LoginForm from './views/Forms/LoginForm.js';
+import ProfilePage from './views/Profile/Profile.js';
 
 
 
 function App() {
+
+  
+
+  function isLoggedIn(){
+    return false
+  }
+
   return (
     <div className="App">
       <NavBar/>
@@ -17,6 +25,7 @@ function App() {
         <Route exact path='/blog' element={<Blog/>}/>
         <Route exact path="/weather" element={<Weather />}/>
         <Route exact path="/login" element={<LoginForm/>}/>
+        <Route exact path='/profile' element={isLoggedIn() ? <ProfilePage/> : <Navigate to={"/login"}/>}/>
       </Routes>
     </div>
   );

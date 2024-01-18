@@ -1,5 +1,5 @@
 import "./Home.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Popup from 'reactjs-popup';
 import { BookA, Thermometer } from 'lucide-react';
@@ -9,6 +9,7 @@ import { Component } from 'lucide-react';
 import 'reactjs-popup/dist/index.css';
 import WeatherList from "../../components/weather/WeatherList";
 import HealthList from "../../components/health/HealthList";
+import { AuthContext } from "../../components/ActionContext/ActionContext";
 
 
 
@@ -18,6 +19,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [health,setHealth] = useState(null) 
+  const {user} = useContext(AuthContext)
 
   useEffect(() => {
     const getLocation = () => {
@@ -77,7 +79,7 @@ const Home = () => {
     <div className="main-cont">
 
     
-      Welcome to Home page
+      Welcome to {JSON.stringify(user)}
       <div className="current-cont">
       <div className="weatherMain-cont">
       {loading && <p>Loading...</p>}
@@ -87,7 +89,7 @@ const Home = () => {
           <h2>Current Weather</h2>
           <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt={weatherData.weather[0].description} />
           <div className="info-cont">
-          <p><MapPin/>: {weatherData.name}</p>
+          <p><MapPin/>: {weatherData?.name}</p>
           <p><Thermometer/>: {weatherData.main.temp} °C</p>
           <p><BookA/>: {weatherData.weather[0].description}</p>
           </div>
@@ -99,7 +101,7 @@ const Home = () => {
           {health && (
             <div className="healthCont">
             <h1>Air Quality</h1>
-                <h2><MapPin/>: {weatherData.name}</h2>
+                <h2><MapPin/>: {weatherData?.name}</h2>
                 <h2><SprayCan/>: {health.list[0].main.aqi}</h2>
                 <h3><Component/>:</h3>
                 <div className="components-cont">

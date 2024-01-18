@@ -32,7 +32,7 @@ form{
     background-color: #E5EEEB;
 }
 
-label{
+.label-cont{
 	color: #E5EEEB;
 	font-size: 2.3em;
 	justify-content: center;
