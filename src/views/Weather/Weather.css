@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid red;
-    margin-left: 50%;
+    margin-left: 20%;
 }
 
 .weatherpage-cont{
@@ -12,4 +12,22 @@
     flex-direction: row;
     
     
+}
+
+
+.days-cont{
+    /* column-count: 5;
+    gap: 100px;
+    border: 5px solid red;
+    column-rule: 1px solid lightblue;
+    padding: 30px; */
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid red;
+    padding: 30px;
+}
+.days-columns-container{
+    display: flex;
 }
