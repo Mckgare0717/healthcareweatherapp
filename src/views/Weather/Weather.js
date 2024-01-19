@@ -17,14 +17,16 @@ const Weather = () => {
     const lat = useRef(null)
     const [forecast, setForecast] = useState([])
     const [error, seterror] = useState(null)
-    const [input,setInput] = useState("")
+    const [input, setInput] = useState("")
     const fiveForecasts = forecast.slice(0, 5)
 
     const API_KEY = "f38da1927783f2c2f89896fd09011d11"
 
 
-    async function getForecast() {
+    async function getForecast(e) {
+        e.preventDefault()
         setCity(input)
+        
 
 
         await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`).then((res) => {
@@ -37,9 +39,9 @@ const Weather = () => {
             console.error("error fetching data ", error)
         })
 
-        await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat.current}&lon=${long.current}&appid=${API_KEY}`).then((res) => {
+        await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat.current}&lon=${long.current}&exclude="hourly,minutely"&appid=${API_KEY}&units=metric`).then((res) => {
 
-            setForecast(res.data.list)
+            setForecast(res.data.daily)
             const fiveForecasts = forecast.slice(0, 5)
             console.log(fiveForecasts)
             setWeather(res.data)
@@ -61,33 +63,39 @@ const Weather = () => {
     return (
         <div className="weatherpage-cont">
             <div className="forecast-cont">
-                <div class="search-container">
-                    <input type="text" name="City" placeholder="Enter City" value={input} onChange={(e)=>setInput(e.target.value)} class="search-input" />
-                    <a href={getForecast} class="search-btn">
-                        <Search/>
-                    </a>
-                </div>
+                <form onSubmit={(e) => getForecast(e)} class="search-container">
+                    <h4>Enter your city: </h4>
+                    <input type="text" name="City" placeholder="Enter City" value={input} onChange={(e) => setInput(e.target.value)} class="search-input" />
+                    <button type="submit" class="search-btn">
+                        <Search color="#4BCCDE" />
+                    </button>
+                </form>
                 {/* <div className="input-field">
                     <input type="text" placeholder="Enter City" className="city-inp" />
                     <button onClick={getForecast}>test</button>
                 </div> */}
-                
-                <p>your City Forecast: </p>
-                <div className="days-columns-container">
+                {
+                    fiveForecasts!== null && <>
+                    <p>your City Forecast: </p>
+                        <div className="days-columns-container">
+                        
+                            {
+                                fiveForecasts.map((item) => {
+                                    return <div className="days-cont">
+                                        <h4>date: {getFormattedDate(item.dt)}</h4>
+                                        <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={item.weather[0].description}/>
+                                        <h4>temp during morning: {item.temp.morn}</h4>
+                                        <h4>temp during day: {item.temp.day}</h4>
+                                        <h4>temp during evening: {item.temp.eve}</h4>
+                                        <h4>temp during night: {item.temp.night}</h4>
+                                        <h4>Summary: {item.summary}</h4>
+                                    </div>
 
-                    {
-                        fiveForecasts.map((item) => {
-                            return <div className="days-cont">
-                                <h4>date: {getFormattedDate(item.dt)}</h4>
-                                <h4>1</h4>
-                                <h4>1</h4>
-                                <h4>1</h4>
-                                <h4>1</h4>
-                            </div>
-
-                        })
-                    }
-                </div>
+                                })
+                            }
+                        </div>
+                    </>
+                }
 
             </div>
 

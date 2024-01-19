@@ -1,10 +1,18 @@
 .list-cont{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items:flex-end;
+    justify-content:end;
     border: 1px solid red;
-    margin-left: 20%;
+    margin-left: 10px;
+    padding: 0%;
+    margin-top: 20px;
+    
+
+    & .Health-cont{
+        width:auto;
+    }
+    
 }
 
 .weatherpage-cont{
@@ -27,9 +35,18 @@
 
     /* border: 1px solid red; */
     padding: 30px;
+    justify-content: space-evenly;
 }
 .days-columns-container{
     display: flex;
+}
+
+.forecast-cont{
+    border: 2px solid red;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-right: 10%;
+    background-color: grey;
 }
 
 
@@ -42,7 +59,7 @@
     padding: 10px;
 
 
-    & button{
+    &button{
         background: none;
         height: 10%;
         margin-top: 30px;
@@ -57,10 +74,15 @@
     border-radius: 30px;
     padding: 10px 20px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    cursor: pointer;
+    /* cursor:pointer; */
     transition: 0.8s;
+    flex-wrap: nowrap;
+    
+    margin-top: 30px;
+    margin-left: 30px;
+    width: fit-content;
     /*box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
     inset -7px -7px 10px 0px rgba(0,0,0,.1),
    7px 7px 20px 0px rgba(0,0,0,.1),
@@ -75,25 +97,34 @@
 }
 
 .search-container:hover > .search-input{
-    width: 400px;
+    width: 400%;
 }
 
 .search-container .search-input{
     background: transparent;
     border: none;
     outline:none;
-    width: 0px;
+    width: 0%;
     font-weight: 500;
     font-size: 16px;
     transition: 0.8s;
+    margin: 0;
+    padding: 0;
+    
 
 }
 
 .search-container .search-btn .fas{
     color: #5cbdbb;
+    
+    
+}
+.search-btn{
+    border: none;
+    background: none;
 }
 
-@keyframes hoverShake {
+/* @keyframes hoverShake {
   0% {transform: skew(0deg,0deg);}
   25% {transform: skew(5deg, 5deg);}
   75% {transform: skew(-5deg, -5deg);}
@@ -102,4 +133,5 @@
 
 .search-container:hover{
   animation: hoverShake 0.0s linear 3;
-}
+  
+} */
