@@ -3,6 +3,7 @@ import WeatherList from "../../components/weather/WeatherList.js"
 import HealthList from "../../components/health/HealthList.js"
 import { useState, useRef } from "react"
 import axios from "axios"
+import { Goal } from "lucide-react"
 
 
 const Weather = () => {
@@ -18,9 +19,13 @@ const Weather = () => {
     const fiveForecasts = forecast.slice(0, 5)
 
     const API_KEY = "f38da1927783f2c2f89896fd09011d11"
-
+    
+    
     async function getForecast() {
-        await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q="hounslow"&limit=${1}&appid=${API_KEY}`).then((res) => {
+
+        
+        
+        await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q="goa,IN"&appid=${API_KEY}`).then((res) => {
             // setlat(res.data[0].lat)
             // setLong(res.data[0].long)
             lat.current = res.data[0].lat;
@@ -60,7 +65,7 @@ const Weather = () => {
                 <p>your City Forecast: </p>
                 <div className="days-columns-container">
                 
-                    {
+                   {
                         fiveForecasts.map((item) => {
                             return <div className="days-cont">
                                 <h4>date: {getFormattedDate(item.dt)}</h4>
@@ -69,7 +74,7 @@ const Weather = () => {
                                 <h4>1</h4>
                                 <h4>1</h4>
                             </div>
-
+ 
                         })
                     }
                 </div>
@@ -78,8 +83,8 @@ const Weather = () => {
 
 
             <div className="list-cont">
-                <WeatherList />
-                <HealthList />
+                {/* <WeatherList />
+                <HealthList /> */}
             </div>
         </div>
     )
