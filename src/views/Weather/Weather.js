@@ -3,7 +3,8 @@ import WeatherList from "../../components/weather/WeatherList.js"
 import HealthList from "../../components/health/HealthList.js"
 import { useState, useRef } from "react"
 import axios from "axios"
-import { Goal } from "lucide-react"
+
+import { Search } from 'lucide-react';
 
 
 const Weather = () => {
@@ -16,16 +17,17 @@ const Weather = () => {
     const lat = useRef(null)
     const [forecast, setForecast] = useState([])
     const [error, seterror] = useState(null)
+    const [input,setInput] = useState("")
     const fiveForecasts = forecast.slice(0, 5)
 
     const API_KEY = "f38da1927783f2c2f89896fd09011d11"
-    
-    
-    async function getForecast() {
 
-        
-        
-        await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q="goa,IN"&appid=${API_KEY}`).then((res) => {
+
+    async function getForecast() {
+        setCity(input)
+
+
+        await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`).then((res) => {
             // setlat(res.data[0].lat)
             // setLong(res.data[0].long)
             lat.current = res.data[0].lat;
@@ -36,7 +38,7 @@ const Weather = () => {
         })
 
         await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat.current}&lon=${long.current}&appid=${API_KEY}`).then((res) => {
-            
+
             setForecast(res.data.list)
             const fiveForecasts = forecast.slice(0, 5)
             console.log(fiveForecasts)
@@ -55,17 +57,25 @@ const Weather = () => {
         return date.toLocaleDateString('en-US', options);
     };
 
+
     return (
         <div className="weatherpage-cont">
             <div className="forecast-cont">
-                <button onClick={getForecast}>test</button>
-                <input type="text" placeholder="Enter City" className="city-inp" />
-
-
+                <div class="search-container">
+                    <input type="text" name="City" placeholder="Enter City" value={input} onChange={(e)=>setInput(e.target.value)} class="search-input" />
+                    <a href={getForecast} class="search-btn">
+                        <Search/>
+                    </a>
+                </div>
+                {/* <div className="input-field">
+                    <input type="text" placeholder="Enter City" className="city-inp" />
+                    <button onClick={getForecast}>test</button>
+                </div> */}
+                
                 <p>your City Forecast: </p>
                 <div className="days-columns-container">
-                
-                   {
+
+                    {
                         fiveForecasts.map((item) => {
                             return <div className="days-cont">
                                 <h4>date: {getFormattedDate(item.dt)}</h4>
@@ -74,7 +84,7 @@ const Weather = () => {
                                 <h4>1</h4>
                                 <h4>1</h4>
                             </div>
- 
+
                         })
                     }
                 </div>
@@ -83,8 +93,8 @@ const Weather = () => {
 
 
             <div className="list-cont">
-                {/* <WeatherList />
-                <HealthList /> */}
+                <WeatherList />
+                <HealthList />
             </div>
         </div>
     )
