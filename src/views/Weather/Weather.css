@@ -39,14 +39,31 @@
 }
 .days-columns-container{
     display: flex;
+    flex-direction: column;
+
+    & h4{
+        margin: 0;
+    }
+}
+
+.days-columns-container-full{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & button{
+        max-height: 20%;
+    }
 }
 
 .forecast-cont{
-    border: 2px solid red;
-    margin-left: 20px;
-    margin-top: 20px;
-    margin-right: 10%;
-    background-color: grey;
+    /* border: 2px solid red; */
+    width:100%;
+    padding: 32px;
+    /* margin-left: 20px; */
+    /* margin-top: 20px; */
+    /* margin-right: 10%; */
+    background-color:#d4e0e0;
 }
 
 
@@ -69,20 +86,24 @@
 
 
 .search-container{
+    box-sizing: border-box;
     background: #fff;
     height: 30px;
     border-radius: 30px;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     display: flex;
     justify-content: flex-start;
     align-items: center;
     /* cursor:pointer; */
-    transition: 0.8s;
+    /* transition: 0.8s; */
     flex-wrap: nowrap;
+    gap: 8px;
     
-    margin-top: 30px;
-    margin-left: 30px;
-    width: fit-content;
+    padding: 8px 16px;
+    /* margin-top: 30px;
+    margin-left: 30px; */
+    width: 100%;
+    max-width: 400px;
     /*box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
     inset -7px -7px 10px 0px rgba(0,0,0,.1),
    7px 7px 20px 0px rgba(0,0,0,.1),
@@ -94,23 +115,30 @@
               -4px -4px 6px 0 rgba(116, 125, 136, .2), 
     inset -4px -4px 6px 0 rgba(255,255,255,.2),
     inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+
+    & h4{
+        text-wrap: nowrap;
+    }
 }
 
-.search-container:hover > .search-input{
+/* .search-container:hover > .search-input{
     width: 400%;
-}
+} */
 
 .search-container .search-input{
     background: transparent;
     border: none;
     outline:none;
-    width: 0%;
+    width: 100%;
     font-weight: 500;
     font-size: 16px;
-    transition: 0.8s;
+    /* transition: 0.8s; */
     margin: 0;
     padding: 0;
-    
+    min-width: 100px;
+    &:focus{
+        border: 1px solid red;
+    }
 
 }
 
