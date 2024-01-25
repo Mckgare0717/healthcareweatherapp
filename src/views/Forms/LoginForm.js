@@ -48,7 +48,7 @@ const LoginForm = () => {
             setUser(res.data)
             setToken(res.data.access_token)
             localStorage.setItem("token",res.data.access_token)
-            localStorage.setItem("user",res.data)
+            localStorage.setItem("user",JSON.parse(res.data))
             alert("new user registered")
             navigate("/")
             

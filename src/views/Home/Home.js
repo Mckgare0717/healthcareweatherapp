@@ -80,7 +80,7 @@ const Home = () => {
     <div className="main-cont">
 
     
-      {user ? user.name: null}
+      {user ? <h1>Welcome {user.name}</h1> : null}
       <div className="current-cont">
       <div className="weatherMain-cont">
       {loading && <p>Loading...</p>}

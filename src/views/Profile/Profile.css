@@ -1,0 +1,47 @@
+.profile-page{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 10px;
+
+}
+
+.profile-cont{
+    display: flex;
+    flex-direction: column;
+    background-color: #5cbdbb;
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 10;
+
+    & img{
+        width: 40%;
+        border-radius: 10px;
+    }
+
+    & h4{
+        margin: 0;
+    }
+}
+
+.weatherMain-cont-prf{
+    display: flex;
+    flex-direction: column;
+    background-color: #5cbdbb;
+    padding: 30px;
+    align-items: center;
+}
+
+
+
+.healthCont-prf{
+    display: flex;
+    flex-direction: column;
+    background-color: #5cbdbb;
+    width:50%;
+    padding: 50px;
+    align-items: center;
+}
