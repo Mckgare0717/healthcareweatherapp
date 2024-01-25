@@ -18,8 +18,9 @@ const NavBar = () => {
             localStorage.removeItem("token")
             setToken(null)
             setUser(null)
-            alert("you are now logged out")
             navigate("/")
+            alert("you are now logged out")
+            
             
         }
 

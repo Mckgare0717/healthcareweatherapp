@@ -1,0 +1,27 @@
+.headname {
+    text-align: center;
+    position: relative;
+    .headline {
+      background-color: white;
+      padding: 0px 0.5em;
+      font-family: arial;
+      transition: padding .5s;
+      cursor: pointer;
+      &:hover {
+        transition: padding .5s;
+        padding: 0px 1em;
+      }
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      background: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.8), rgba(0,0,0,0));
+      left: 0px;
+      top: 50%;
+      z-index: -1;
+      display: inline-block;
+      
+    }
+  }
