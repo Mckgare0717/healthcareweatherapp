@@ -1,8 +1,11 @@
 
 
-  a{
+  a,a:visited{
     text-decoration: none;
+    color: blue;
   }
+
+
   /* DEFAULT STYLE */
   :root {
     font-size: 16px;

@@ -53,7 +53,8 @@ const LoginForm = () => {
             navigate("/")
             
         }).catch((error) =>{
-            alert(JSON.stringify(error.response.data.detail))})
+            alert(error.response.data.detail)
+        })
 
     }
 

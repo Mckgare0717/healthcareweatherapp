@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Blog = () => {
     const [news, setNews] = useState([])
-    const [loading, setLoading] = useState([])
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const API_KEY = "f38da1927783f2c2f89896fd09011d11"
 
@@ -16,6 +16,7 @@ const Blog = () => {
                     (position) => {
                         const { latitude, longitude } = position.coords;
                         getNews(latitude, longitude)
+                        setLoading(false)
                     },
                     (error) => {
                         setError("Error getting location: " + error.message);
@@ -42,29 +43,35 @@ const Blog = () => {
 
     }, [])
 
+
+    if (loading) {
+        return <p>Loading...</p>
+    }
+
     return (
         <div className="blog-cont">
             <Sectionheading text="Blog" />
             <div className="article-cont">
-            {
-                news.map((item) => {
-                    return <div>
-                        <div class="card card-1">
-                            <div class="card-img"></div>
-                            <a href={item.link} class="card-link">
-                                <div class="card-img-hovered" style={{backgroundImage:`url(${item.image_url})`}}></div> 
-                            </a>
-                            <div class="card-info">
-                                <div class="card-about">
-                                    <div class="card-time">{item.pubDate}</div>
+
+                {
+                    news.map((item) => {
+                        return <div>
+                            <div class="card card-1">
+                                <div class="card-img"></div>
+                                <a href={item.link} class="card-link" target="_blank">
+                                    <div class="card-img-hovered" style={{ backgroundImage: `url(${item.image_url})` }}></div>
+                                </a>
+                                <div class="card-info">
+                                    <div class="card-about">
+                                        <div class="card-time">{item.pubDate}</div>
+                                    </div>
+                                    <h1 class="card-title"><a href={item.link} target="_blank">{item.title}</a></h1>
+                                    {item.creator ? <div class="card-creator">by <a href="">{item.creator}</a></div> : <div class="card-creator">by <a href="">unknown</a></div>}
                                 </div>
-                                <h1 class="card-title"><a href={item.link}>{item.title}</a></h1>
-                                <div class="card-creator">by <a href="">{item.creator}</a></div>
                             </div>
                         </div>
-                    </div>
-                })
-            }
+                    })
+                }
             </div>
 
         </div>

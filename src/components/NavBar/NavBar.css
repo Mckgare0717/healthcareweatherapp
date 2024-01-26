@@ -19,3 +19,9 @@
     display: flex;
     padding-left: 30px;
 }
+
+.logoutbtn{
+    background: none;
+    border: none;
+    font-size: 20px;
+}

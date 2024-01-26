@@ -8,6 +8,7 @@ import LoginForm from './views/Forms/LoginForm.js';
 import ProfilePage from './views/Profile/Profile.js';
 import { AuthContext } from './components/ActionContext/ActionContext.js';
 import { useContext } from 'react';
+import SiteMap from './components/SiteMap/SiteMap.js';
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route exact path="/login" element={<LoginForm/>}/>
         <Route exact path='/profile' element={user ? <ProfilePage/> : <Navigate to={"/login"}/>}/>
       </Routes>
+      <SiteMap/>
     </div>
   );
 }

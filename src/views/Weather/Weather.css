@@ -63,6 +63,7 @@
         border: none;
         background-color:#5cbdbb;
         size: 30px;
+        border-radius: 10px;
     }
 }
 
