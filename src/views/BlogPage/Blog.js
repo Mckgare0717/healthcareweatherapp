@@ -66,7 +66,7 @@ const Blog = () => {
                                         <div class="card-time">{item.pubDate}</div>
                                     </div>
                                     <h1 class="card-title"><a href={item.link} target="_blank">{item.title}</a></h1>
-                                    {item.creator ? <div class="card-creator">by <a href="">{item.creator}</a></div> : <div class="card-creator">by <a href="">unknown</a></div>}
+                                    {item.creator ? <div class="card-creator">by <a href="">{item.creator}</a></div> : <div class="card-creator">by<a href="">unknown</a></div>}
                                 </div>
                             </div>
                         </div>

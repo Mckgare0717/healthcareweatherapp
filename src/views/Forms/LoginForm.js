@@ -53,7 +53,7 @@ const LoginForm = () => {
             navigate("/")
             
         }).catch((error) =>{
-            alert(error.response.data.detail)
+            alert(JSON.stringify(error?.response?.data))
         })
 
     }
@@ -66,9 +66,9 @@ const LoginForm = () => {
                 <div class="signup">
                     <form onSubmit={regForm}>
                         <label className="label-cont" for="chk" aria-hidden="true">Register</label>
-                        <input type="text" name="txt" placeholder="Name" required value={name} onChange={(e)=>setName(e.target.value)}/>
-                            <input type="email" name="email" placeholder="Email" required value={email} onChange={(e)=>setEmail(e.target.value)}/>
-                                <input type="password" name="pswd" placeholder="Password" required value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                        <input className="inpt-fld" type="text" name="txt" placeholder="Name" required value={name} onChange={(e)=>setName(e.target.value)}/>
+                            <input className="inpt-fld" type="email" name="email" placeholder="Email" required value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                                <input className="inpt-fld" type="password" name="pswd" placeholder="Password" required value={password} onChange={(e)=>setPassword(e.target.value)}/>
                                     <button className="auth-btn" type="submit">Sign up</button>
                                 </form>
                             </div>
@@ -76,8 +76,8 @@ const LoginForm = () => {
                             <div class="login">
                                 <form className="loginForm" onSubmit={loginForm}>
                                     <label className="label-cont" for="chk" aria-hidden="true">Login</label>
-                                    <input type="email" name="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)}/>
-                                        <input type="password" name="pswd" placeholder="Password" required="" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                                    <input className="inpt-fld" type="email" name="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)}/>
+                                        <input className="inpt-fld" type="password" name="pswd" placeholder="Password" required="" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                                             <button className="auth-btn" type="submit">Login</button>
                                         </form>
                                     </div>

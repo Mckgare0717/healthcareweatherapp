@@ -39,7 +39,8 @@ const Weather = () => {
 
             lat.current = res.data[0].lat;
             long.current = res.data[0].lon
-            console.log(res.data)
+            
+
             setLocation(res.data)
 
 
@@ -47,14 +48,13 @@ const Weather = () => {
             console.error("error fetching data ", error)
         })
 
-        console.log(`lat: ${lat.current} long: ${long.current}`)
+        
         await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat.current}&lon=${long.current}&exclude="hourly,minutely"&appid=${API_KEY}&units=metric`).then((res) => {
-            console.log("inside the forecast api")
+            
+        
             setForecast(res.data.daily)
             setFiveForecasts(res.data.daily)
-            console.log(res.data.daily)
             setWeather(res.data)
-            console.log(res.data)
             setLoading(false)
             
         }).catch((error) => {
@@ -150,7 +150,7 @@ const Weather = () => {
                 
                 {
                     fiveForecasts ? <>
-
+                        
                         <h1> {location[0]?.name} </h1>
                         <h1>{location[0]?.country}</h1>
                         <div className="days-columns-container-full">

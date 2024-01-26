@@ -9,6 +9,8 @@ import ProfilePage from './views/Profile/Profile.js';
 import { AuthContext } from './components/ActionContext/ActionContext.js';
 import { useContext } from 'react';
 import SiteMap from './components/SiteMap/SiteMap.js';
+import About from "./views/About/About.js"
+import Privacy from './views/PrivacyPolicy/Privacy';
 
 
 
@@ -28,6 +30,8 @@ function App() {
         <Route exact path='/blog' element={<Blog/>}/>
         <Route exact path="/weather" element={<Weather />}/>
         <Route exact path="/login" element={<LoginForm/>}/>
+        <Route exact path="/about" element={<About/>}/>
+        <Route exact path="/privacy" element={<Privacy/>}/>
         <Route exact path='/profile' element={user ? <ProfilePage/> : <Navigate to={"/login"}/>}/>
       </Routes>
       <SiteMap/>

@@ -42,7 +42,7 @@ form{
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
-input{
+.inpt-fld{
 	width: 60%;
 	height: 20px;
 	background: #E5EEEB;
