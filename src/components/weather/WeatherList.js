@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { Thermometer } from 'lucide-react';
 import { BookA } from 'lucide-react';
 import { MapPin } from 'lucide-react';
+import CheckBox from "../checkbox/CheckBox";
 const WeatherList = () => {
     const API_KEY = "f38da1927783f2c2f89896fd09011d11";
 
     const [weather, setWeather] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [units, setUnits] = useState("metric")
 
     const locationsList = [
         {
@@ -70,7 +72,7 @@ const WeatherList = () => {
             locationsList.map((location) =>
                 axios
                     .get(
-                        `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}&units=metric`
+                        `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}&units=${units}`
                     )
                     .then((res) => res.data)
                     .catch((error) => {
@@ -92,7 +94,7 @@ const WeatherList = () => {
 
     useEffect(()=>{
         getWeather()
-    },[])
+    },[units])
 
     if (isLoading) {
         return <h3>Loading.....</h3>;
@@ -100,7 +102,7 @@ const WeatherList = () => {
     return (
 
             <div className="Weather-cont">
-
+                <CheckBox text="Imperial" whenChecked={units==="imperial"} onchange={()=>setUnits(units==="metric"?"imperial":"metric")}/>
                 <h2>Weather</h2>
                 {/* <button onClick={() => getWeather()}>Test</button> */}
                 <div className="weather-cont">

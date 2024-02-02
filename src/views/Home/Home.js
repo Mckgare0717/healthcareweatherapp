@@ -16,12 +16,13 @@ import CheckBox from "../../components/checkbox/CheckBox"
 
 
 const Home = () => {
-  
+
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [health,setHealth] = useState(null) 
-  const {user} = useContext(AuthContext)
+  const [health, setHealth] = useState(null)
+  const { user } = useContext(AuthContext)
+  const [units, setUnits] = useState("metric")
 
 
   //this fetches data and stores it in a variable to display on the page
@@ -33,7 +34,7 @@ const Home = () => {
           (position) => {
             const { latitude, longitude } = position.coords;
             getWeatherData(latitude, longitude);
-            getHealthData(latitude,longitude)
+            getHealthData(latitude, longitude)
           },
           (error) => {
             setError("Error getting location: " + error.message);
@@ -46,10 +47,12 @@ const Home = () => {
       }
     };
 
+
     //this function gets weather data using the latitude and longitude from the above function
     const getWeatherData = async (latitude, longitude) => {
       const API_KEY = "f38da1927783f2c2f89896fd09011d11";
-      const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
+      console.log(units)
+      const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=${units}`;
 
       try {
         const response = await axios.get(API_URL);
@@ -62,7 +65,7 @@ const Home = () => {
     };
 
     //this function gets air quality data from API using the latitude and longitude from the getLocation() function
-    const getHealthData = async (latitude,longitude)=>{
+    const getHealthData = async (latitude, longitude) => {
       const API_KEY = "f38da1927783f2c2f89896fd09011d11";
       const API_URL = `http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
 
@@ -75,49 +78,51 @@ const Home = () => {
         setLoading(false);
       }
     };
-    
-    
+
+
     getLocation();
-  }, []); 
+  }, [units]);
 
 
   return (
     <div className="main-cont">
 
-    
-      {user ? <h1>Welcome {user.name}</h1> : null}
-      <CheckBox text="Standard"/>
-      <CheckBox text="Metrics"/>
 
-      
-      
+      {user ? <h1>Welcome {user.name}</h1> : null}
+      <CheckBox text="Imperial" whenChecked={units==="imperial"} onchange={()=>setUnits(units==="metric"?"imperial":"metric")}/>
+      {/* <input type="checkbox" checked={units === "imperial"} */}
+        {/* // onChange={(e) => setUnits(units === "metric" ? "imperial" : "metric")} /> */}
+
+
+
+
       <div className="current-cont">
-        
-      <div className="weatherMain-cont">
-      {loading && <p>Loading...</p>}
-      
-      
-      {weatherData && (
-        <div className="currentWeather">
-          <h2>Current Weather</h2>
-          <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt={weatherData.weather[0].description} />
-          <div className="info-cont">
-          <p><MapPin/>: {weatherData?.name}</p>
-          <p><Thermometer/>: {weatherData.main.temp} °C</p>
-          <p><BookA/>: {weatherData.weather[0].description}</p>
-          </div>
+
+        <div className="weatherMain-cont">
+          {loading && <p>Loading...</p>}
+
+
+          {weatherData && (
+            <div className="currentWeather">
+              <h2>Current Weather</h2>
+              <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt={weatherData.weather[0].description} />
+              <div className="info-cont">
+                <p><MapPin />: {weatherData?.name}</p>
+                <p><Thermometer />: {weatherData.main.temp}{units=="imperial"?<>°F</>:<>°C</>}</p>
+                <p><BookA />: {weatherData.weather[0].description}</p>
+              </div>
+            </div>
+          )}
         </div>
-      )}
-    </div>
 
         <div className="healthMain-cont">
           {health && (
             <div className="healthCont">
-            <h1>Air Quality</h1>
-                <h2><MapPin/>: {weatherData?.name}</h2>
-                <h2><SprayCan/>: {health.list[0].main.aqi}</h2>
-                <h3><Component/>:</h3>
-                <div className="components-cont">
+              <h1>Air Quality</h1>
+              <h2><MapPin />: {weatherData?.name}</h2>
+              <h2><SprayCan />: {health.list[0].main.aqi}</h2>
+              <h3><Component />:</h3>
+              <div className="components-cont">
                 <h4>co: {health.list[0].components.co}</h4>
                 <h4>nh3: {health.list[0].components.nh3}</h4>
                 <h4>no: {health.list[0].components.no}</h4>
@@ -125,26 +130,25 @@ const Home = () => {
                 <h4>pm25: {health.list[0].components.pm2_5}</h4>
                 <h4>pm10: {health.list[0].components.pm10}</h4>
                 <h4>so2: {health.list[0].components.so2}</h4>
-                </div>
-                
+              </div>
+
 
             </div>
           )
 
           }
         </div>
-        </div>
-      <div className="weatherHealth-cont">
-      <WeatherList/>
-      <HealthList/>
       </div>
-      
-        
-        
-      
+      <div className="weatherHealth-cont">
+        <WeatherList />
+        <HealthList />
+      </div>
+
+
+
+
     </div>
   );
 };
 
 export default Home;
-                                                                            
