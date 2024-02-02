@@ -21,7 +21,6 @@ const LoginForm = () => {
             password:password
         } 
         axios.post("http://localhost:8000/users/login", sendData).then((res)=>{
-            console.log("getting data")
             setUser(res.data)
             setToken(res.data.access_token)
             localStorage.setItem("token",res.data.access_token)
@@ -44,16 +43,16 @@ const LoginForm = () => {
             name:name
         } 
         axios.post("http://localhost:8000/users/register", sendData).then((res)=>{
-            console.log("getting sent")
             setUser(res.data)
             setToken(res.data.access_token)
-            localStorage.setItem("token",res.data.access_token)
-            localStorage.setItem("user",JSON.parse(res.data))
             alert("new user registered")
             navigate("/")
+            localStorage.setItem("token",res.data.access_token)
+            localStorage.setItem("user",JSON.parse(res.data))
+            
             
         }).catch((error) =>{
-            alert(JSON.stringify(error?.response?.data))
+            alert(JSON.stringify(error?.response?.data.detail))
         })
 
     }

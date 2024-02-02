@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react"
 import axios from "axios"
 import { Droplets, Thermometer,Sun } from 'lucide-react';
 import { Search } from 'lucide-react';
+import CheckBox from "../../components/checkbox/CheckBox"
 
 
 const Weather = () => {
@@ -20,6 +21,7 @@ const Weather = () => {
     const inputArray = input.split(",")
     const [location, setLocation] = useState([])
     const [loading,setLoading] = useState(true)
+    const [units,setUnits] = useState("metric")
 
     const API_KEY = "f38da1927783f2c2f89896fd09011d11"
     async function getForecast(e) {
@@ -49,7 +51,7 @@ const Weather = () => {
         })
 
         
-        await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat.current}&lon=${long.current}&exclude="hourly,minutely"&appid=${API_KEY}&units=metric`).then((res) => {
+        await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat.current}&lon=${long.current}&exclude="hourly,minutely"&appid=${API_KEY}&units=${units}`).then((res) => {
             
         
             setForecast(res.data.daily)
@@ -107,7 +109,7 @@ const Weather = () => {
     
         const getWeatherData = async (latitude, longitude) => {
          
-          const API_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude="hourly,minutely"&appid=${API_KEY}&units=metric`;
+          const API_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude="hourly,minutely"&appid=${API_KEY}&units=${units}`;
           const locApi = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=5&appid=${API_KEY}`
     
           try {
@@ -125,7 +127,7 @@ const Weather = () => {
 
 
         getLocation()
-    }, []); 
+    }, [units]); 
 
 
     if (loading) {
@@ -153,16 +155,18 @@ const Weather = () => {
                         
                         <h1> {location[0]?.name} </h1>
                         <h1>{location[0]?.country}</h1>
+                        <CheckBox text="Imperial" whenChecked={units==="imperial"} onchange={()=>setUnits(units==="metric"?"imperial":"metric")}/>
                         <div className="days-columns-container-full">
+                            
                         <button onClick={slidePrev}>Prev Day</button>
                         <div className="days-columns-container">
                             <h4>Date: {getFormattedDate(fiveForecasts[currentSlide]?.dt)} </h4>
                             <img src={`https://openweathermap.org/img/wn/${fiveForecasts[currentSlide]?.weather[0]?.icon}@2x.png`} alt={fiveForecasts[currentSlide]?.weather[0]?.description} />
-                            <h4><Thermometer/>temp during morning: {fiveForecasts[currentSlide]?.temp?.morn}°C</h4>
-                            <h4><Thermometer/>temp during day: {fiveForecasts[currentSlide]?.temp?.day}°C</h4>
-                            <h4><Thermometer/>temp during evening: {fiveForecasts[currentSlide]?.temp?.eve}°C</h4>
-                            <h4><Thermometer/>temp during night: {fiveForecasts[currentSlide]?.temp?.night}°C</h4>
-                            <h4><Droplets/>Humidity: {fiveForecasts[currentSlide]?.humidity}°C</h4>
+                            <h4><Thermometer/>temp during morning: {fiveForecasts[currentSlide]?.temp?.morn}{units=="imperial"?<>°F</>:<>°C</>}</h4>
+                            <h4><Thermometer/>temp during day: {fiveForecasts[currentSlide]?.temp?.day}{units=="imperial"?<>°F</>:<>°C</>}</h4>
+                            <h4><Thermometer/>temp during evening: {fiveForecasts[currentSlide]?.temp?.eve}{units=="imperial"?<>°F</>:<>°C</>}</h4>
+                            <h4><Thermometer/>temp during night: {fiveForecasts[currentSlide]?.temp?.night}{units=="imperial"?<>°F</>:<>°C</>}</h4>
+                            <h4><Droplets/>Humidity: {fiveForecasts[currentSlide]?.humidity}{units=="imperial"?<>°F</>:<>°C</>}</h4>
                             <h4><Sun/>UVI: {fiveForecasts[currentSlide]?.uvi}UV</h4>
                             <p>Summary: {fiveForecasts[currentSlide]?.summary}</p>
                             

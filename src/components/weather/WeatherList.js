@@ -109,7 +109,7 @@ const WeatherList = () => {
                     {weather.map((location) => (
                         <div className="diff-weather active" key={location.id}>
                             <h4><MapPin/>:{location.name}</h4>
-                            <h4 className="temp"><Thermometer/>: {location.main.temp}°C</h4>
+                            <h4 className="temp"><Thermometer/>: {location.main.temp}{units=="imperial"?<>°F</>:<>°C</>}</h4>
                             <h4><BookA/>:{location.weather[0].description}</h4>
                             <img src={`https://openweathermap.org/img/wn/${location.weather[0].icon}@2x.png`} alt={location.weather[0].description} />
                         </div>

@@ -51,7 +51,6 @@ const Home = () => {
     //this function gets weather data using the latitude and longitude from the above function
     const getWeatherData = async (latitude, longitude) => {
       const API_KEY = "f38da1927783f2c2f89896fd09011d11";
-      console.log(units)
       const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=${units}`;
 
       try {
@@ -89,9 +88,8 @@ const Home = () => {
 
 
       {user ? <h1>Welcome {user.name}</h1> : null}
-      <CheckBox text="Imperial" whenChecked={units==="imperial"} onchange={()=>setUnits(units==="metric"?"imperial":"metric")}/>
-      {/* <input type="checkbox" checked={units === "imperial"} */}
-        {/* // onChange={(e) => setUnits(units === "metric" ? "imperial" : "metric")} /> */}
+      
+      
 
 
 
@@ -104,6 +102,7 @@ const Home = () => {
 
           {weatherData && (
             <div className="currentWeather">
+              <CheckBox text="Imperial" whenChecked={units==="imperial"} onchange={()=>setUnits(units==="metric"?"imperial":"metric")}/>
               <h2>Current Weather</h2>
               <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt={weatherData.weather[0].description} />
               <div className="info-cont">

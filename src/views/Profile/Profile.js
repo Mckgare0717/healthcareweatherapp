@@ -8,6 +8,7 @@ import { BookA, Thermometer } from 'lucide-react';
 import { MapPin } from 'lucide-react';
 import { SprayCan } from 'lucide-react';
 import { Component } from 'lucide-react';
+import CheckBox from "../../components/checkbox/CheckBox";
 
 
 const ProfilePage = () => {
@@ -16,6 +17,7 @@ const ProfilePage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [health, setHealth] = useState(null)
+    const [units,setUnits] = useState("metric")
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
@@ -40,7 +42,7 @@ const ProfilePage = () => {
 
         const getWeatherData = async (latitude, longitude) => {
             const API_KEY = "f38da1927783f2c2f89896fd09011d11";
-            const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
+            const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=${units}`;
 
             try {
                 const response = await axios.get(API_URL);
@@ -69,20 +71,20 @@ const ProfilePage = () => {
 
 
         getLocation();
-    }, []);
+    }, [units]);
 
     return (
         <div className="profile-page">
         <div className="weatherMain-cont-prf">
       {loading && <p>Loading...</p>}
-      
+      <CheckBox text="Imperial" whenChecked={units==="imperial"} onchange={()=>setUnits(units==="metric"?"imperial":"metric")}/>
       {weatherData && (
         <div className="currentWeather">
           <h2>Current Weather</h2>
           <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt={weatherData.weather[0].description} />
           <div className="info-cont">
           <p><MapPin/>: {weatherData?.name}</p>
-          <p><Thermometer/>: {weatherData.main.temp} °C</p>
+          <p><Thermometer/>: {weatherData.main.temp}{units=="imperial"?<>°F</>:<>°C</>}</p>
           <p><BookA/>: {weatherData.weather[0].description}</p>
           </div>
         </div>
