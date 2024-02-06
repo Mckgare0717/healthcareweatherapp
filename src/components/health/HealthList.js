@@ -5,6 +5,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { SprayCan } from 'lucide-react';
 import { MapPin } from 'lucide-react';
+import { HelpCircle } from 'lucide-react';
 
 const HealthList = () => {
   const API_KEY = "f38da1927783f2c2f89896fd09011d11";
@@ -122,53 +123,57 @@ const HealthList = () => {
               <div className="health-popup">
                 <h4>Components: </h4>
                 <div className="popup-group">
-                  <label for="co">CO:</label>
-                  <h4 id="co">{health.list[0].components.co}</h4>
+                  <label for="co">Carbon Monoxide :<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Carbon Monoxide</h3>Carbon monoxide (chemical formula CO) is a poisonous, flammable gas that is colorless, odorless, tasteless, and slightly less dense than air.
+                   Carbon monoxide consists of one carbon atom and one oxygen atom connected by a triple bond. It is the simplest carbon oxide. 
+                   In coordination complexes, the carbon monoxide ligand is called carbonyl. It is a key ingredient in many processes in industrial chemistry.[5]
+                    [7]
+                    .</p></Popup></label>
+                  <h4 id="co">{health.list[0].components.co}μg/m3</h4>
                   <progress id="co" value={health.list[0].components.co} max="300"> {health.list[0].components.co}% </progress>
                 </div>
                 <div className="popup-group">
-                  <label for="nh3">NH3:</label>
-                  <h4 id="nh3">{health.list[0].components.nh3}</h4>
+                  <label for="nh3">Nitrogen Monoxide:<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Nitrogen Monoxide</h3></p></Popup><HelpCircle /></label>
+                  <h4 id="nh3">{health.list[0].components.nh3}μg/m3</h4>
                   <progress id="nh3" value={health.list[0].components.nh3} max="10"> {health.list[0].components.nh3}% </progress>
                 </div>
                 <div className="popup-group">
-                  <label for="no">NO:</label>
-                  <h4 id="no">{health.list[0].components.no}</h4>
+                  <label for="no">Ammonia:<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Ammonia</h3></p></Popup></label>
+                  <h4 id="no">{health.list[0].components.no}μg/m3</h4>
                   <progress id="no" value={health.list[0].components.no} max="10"> {health.list[0].components.no}% </progress>
                 </div>
                 <div className="popup-group">
-                <label for="no2">NO2:</label>
-                <h4 id="no2">{health.list[0].components.n2o}</h4>
-                <progress id="no2" value={health.list[0].components.no2} max="100"> {health.list[0].components.no2}% </progress>
+                  <label for="no2">Nitrogen Dioxide:<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Nitrogen Dioxide</h3></p></Popup></label>
+                  <h4 id="no2">{health.list[0].components.n2o}μg/m3</h4>
+                  <progress id="no2" value={health.list[0].components.no2} max="100"> {health.list[0].components.no2}% </progress>
+                </div>
+                <div className="popup-group">
+                  <label for="o3">Ozone:<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Ozone</h3></p></Popup></label>
+                  <h4 id="o3">{health.list[0].components.o3}μg/m3</h4>
+                  <progress id="o3" value={health.list[0].components.o3} max="100"> {health.list[0].components.o3}% </progress>
+                </div>
+                <div className="popup-group">
+                  <label for="pm2_5">Fine Particles Matter:<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Fine Particles Matter</h3></p></Popup></label>
+                  <h4 id="pm2_5">{health.list[0].components.pm2_5}μg/m3</h4>
+                  <progress id="pm2_5" value={health.list[0].components.pm2_5} max="10"> {health.list[0].components.pm2_5}% </progress>
+                </div>
+                <div className="popup-group">
+                  <label for="pm10">Coarse Particles Matter:<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Coarse Particles Matter</h3></p></Popup></label>
+                  <h4 id="pm10">{health.list[0].components.pm10}μg/m3</h4>
+                  <progress id="pm10" value={health.list[0].components.pm10} max="10"> {health.list[0].components.pm10}% </progress>
+                </div>
+                <div className="popup-group">
+                  <label for="so2">Sulpher dioxide:<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Sulpher dioxide</h3></p></Popup></label>
+                  <h4 id="so2">{health.list[0].components.so2}μg/m3</h4>
+                  <progress id="so2" value={health.list[0].components.so2} max="10"> {health.list[0].components.so2}% </progress>
+                </div>
               </div>
-              <div className="popup-group">
-                <label for="o3">O3:</label>
-                <h4 id="o3">{health.list[0].components.o3}</h4>
-                <progress id="o3" value={health.list[0].components.o3} max="100"> {health.list[0].components.o3}% </progress>
-              </div>
-              <div className="popup-group">
-                <label for="pm2_5">PM25:</label>
-                <h4 id="pm2_5">{health.list[0].components.pm2_5}</h4>
-                <progress id="pm2_5" value={health.list[0].components.pm2_5} max="10"> {health.list[0].components.pm2_5}% </progress>
-              </div>
-              <div className="popup-group">
-                <label for="pm10">PM10:</label>
-                <h4 id="pm10">{health.list[0].components.pm10}</h4>
-                <progress id="pm10" value={health.list[0].components.pm10} max="10"> {health.list[0].components.pm10}% </progress>
-              </div>
-              <div className="popup-group">
-                <label for="so2">SO2:</label>
-                <h4 id="so2">{health.list[0].components.so2}</h4>
-                <progress id="so2" value={health.list[0].components.so2} max="10"> {health.list[0].components.so2}% </progress>
-              </div>
-          </div>
-              
+
             </Popup>
 
 
-    </div>
-  ))
-}
+          </div>
+        ))
+        }
       </div >
     </div >
   )
