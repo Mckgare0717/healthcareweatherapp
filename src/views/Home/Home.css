@@ -56,6 +56,19 @@
     background-color: #E5EEEB;
     padding: 30px;
     gap: 10px;
+    max-width: 80%;
+
+
+    & h4{
+        display: flex;
+        flex-direction: column;
+
+        & span{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
 }
 
 .current-cont{
