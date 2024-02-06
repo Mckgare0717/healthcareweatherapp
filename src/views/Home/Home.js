@@ -10,9 +10,11 @@ import 'reactjs-popup/dist/index.css';
 import WeatherList from "../../components/weather/WeatherList";
 import HealthList from "../../components/health/HealthList";
 import { AuthContext } from "../../components/ActionContext/ActionContext";
-import { json } from "react-router-dom";
 import CheckBox from "../../components/checkbox/CheckBox"
 import { HelpCircle } from "lucide-react";
+import { AgGridReact } from 'ag-grid-react'; // React Grid Logic
+import "ag-grid-community/styles/ag-grid.css"; // Core CSS
+import "ag-grid-community/styles/ag-theme-quartz.css"; // Theme
 
 
 
@@ -24,7 +26,14 @@ const Home = () => {
   const [health, setHealth] = useState(null)
   const { user } = useContext(AuthContext)
   const [units, setUnits] = useState("metric")
+  const [rowData,setRowData] = useState([
+    {"Quality":1,"description":"Good"},
+    {"Quality":2,"description":"Fair"},
+  {"Quality":3,"description":"Moderate"},
+  {"Quality":4,"description":"Poor"},
+  {"Quality":5,"description":"Very Poor"}])
 
+  const [colData,setColData] = useState([{"field":"Quality"},{"field":"description"}])
 
   //this fetches data and stores it in a variable to display on the page
   useEffect(() => {
@@ -120,8 +129,9 @@ const Home = () => {
             <div className="healthCont">
               <h1>Air Quality</h1>
               <h2><MapPin />: {weatherData?.name}</h2>
-              <h2><SprayCan />: {health.list[0].main.aqi}</h2>
+              <h2><SprayCan />: {health.list[0].main.aqi}<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="top center"><h3>Air Quality Index</h3><div className="ag-theme-quartz"><AgGridReact rowData={rowData} columnDefs={colData}/></div></Popup></h2>
               <h3><Component />:</h3>
+              
               <div className="components-cont">
                 <h4><span>Carbon Monoxide <Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Carbon Monoxide</h3>Carbon monoxide (chemical formula CO) is a poisonous, flammable gas that is colorless, odorless, tasteless, and slightly less dense than air.
                   Carbon monoxide consists of one carbon atom and one oxygen atom connected by a triple bond. It is the simplest carbon oxide.
@@ -132,7 +142,7 @@ const Home = () => {
                   Ammonia in pure form is also applied directly into the soil.</p></Popup> </span>{health.list[0].components.nh3}μg/m3</h4>
                 <h4><span>Nitrogen Monoxide<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Nitrogen Monoxide</h3>Nitric oxide (nitrogen oxide or nitrogen monoxide[1]) is a colorless gas with the formula NO. It is one of the principal oxides of nitrogen. Nitric oxide is a free radical: it has an unpaired electron, which is sometimes denoted by a dot in its chemical formula (•N=O or •NO). Nitric oxide is also a heteronuclear diatomic molecule,
                   a class of molecules whose study spawned early modern theories of chemical bonding.</p></Popup> </span>{health.list[0].components.no}μg/m3</h4>
-                <h4><span>Ozone<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Ozone</h3>Ozone (/ˈoʊzoʊn/) (or trioxygen) is an inorganic molecule with the chemical formula O
+                <h4><span>Ozone<Popup on={['hover', 'focus']} trigger={<HelpCircle />} position="right center"><p><h3>Ozone</h3>Ozone is an inorganic molecule with the chemical formula O
                   3. It is a pale blue gas with a distinctively pungent smell. It is an allotrope of oxygen that is much less stable than the diatomic allotrope O
                   2, breaking down in the lower atmosphere to O
                   2 (dioxygen). Ozone is formed from dioxygen by the action of ultraviolet (UV) light and electrical discharges within the Earth's atmosphere. It is present in very low concentrations throughout the atmosphere, with its highest concentration high in the ozone layer of the stratosphere,
