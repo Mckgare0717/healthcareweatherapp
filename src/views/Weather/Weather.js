@@ -155,7 +155,6 @@ const Weather = () => {
                         
                         <h1> {location[0]?.name} </h1>
                         <h1>{location[0]?.country}</h1>
-                        <CheckBox text="Imperial" whenChecked={units==="imperial"} onchange={()=>setUnits(units==="metric"?"imperial":"metric")}/>
                         <div className="days-columns-container-full">
                             
                         <button onClick={slidePrev}>Prev Day</button>
