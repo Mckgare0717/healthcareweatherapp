@@ -24,6 +24,7 @@ function App() {
 
   return (
     <div className="App">
+    <title>Health Advice Group</title>
       <NavBar/>
       <Routes>
         <Route exact path='/' element={<Home />}/>

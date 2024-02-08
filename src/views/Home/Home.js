@@ -15,11 +15,13 @@ import { HelpCircle } from "lucide-react";
 import { AgGridReact } from 'ag-grid-react'; // React Grid Logic
 import "ag-grid-community/styles/ag-grid.css"; // Core CSS
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Theme
+import { TitleTab } from "../../components/TitleTab";
 
 
 
 const Home = () => {
 
+  TitleTab("Health Advice Group | Home ")
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

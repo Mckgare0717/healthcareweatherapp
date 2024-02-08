@@ -1,6 +1,8 @@
+import { TitleTab } from "../../components/TitleTab";
 import "./Privacy.css"
 
 const Privacy=()=>{
+    TitleTab("Health Advice Group |  Privacy Policy")
     return(
         <div className="privacy">
             <h1>Privacy Policy</h1>

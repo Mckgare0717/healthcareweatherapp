@@ -9,10 +9,11 @@ import { MapPin } from 'lucide-react';
 import { SprayCan } from 'lucide-react';
 import { Component } from 'lucide-react';
 import CheckBox from "../../components/checkbox/CheckBox";
+import { TitleTab } from "../../components/TitleTab";
 
 
 const ProfilePage = () => {
-
+    TitleTab("Health Advice Group | Profile")
     const [weatherData, setWeatherData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

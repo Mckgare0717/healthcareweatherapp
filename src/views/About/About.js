@@ -1,7 +1,10 @@
+import { TitleTab } from "../../components/TitleTab";
 import "./About.css"
 
 
 const About = () => {
+
+    TitleTab("Health Advice Group | About Us")
     return (
         <div className="about">
             <h1>About Us</h1>

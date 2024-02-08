@@ -49,7 +49,7 @@ const NavBar = () => {
                     {token === null &&<NavBtn text="SignIn/Signup" link="/login"/>}
                     <LogoutBtn/>
                     </div>
-                    <ToggleBtn/>
+                    
                 </div>
             </div>
         </header>

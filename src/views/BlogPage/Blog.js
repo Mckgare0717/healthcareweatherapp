@@ -2,8 +2,10 @@ import "./Blog.css"
 import Sectionheading from "../../components/Section Heading/SectionHeading";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { TitleTab } from "../../components/TitleTab";
 
 const Blog = () => {
+    TitleTab("Health Advice Group | Blog")
     const [news, setNews] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)

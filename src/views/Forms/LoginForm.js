@@ -3,9 +3,11 @@ import "./LoginForm.css"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../components/ActionContext/ActionContext";
+import { TitleTab } from "../../components/TitleTab";
 
 const LoginForm = () => {
 
+    TitleTab("Health Advice Group | Auth")
     const navigate = useNavigate()
     const [name,setName] = useState("")
     const [password, setPassword] = useState("");

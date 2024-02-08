@@ -6,10 +6,11 @@ import axios from "axios"
 import { Droplets, Thermometer,Sun } from 'lucide-react';
 import { Search } from 'lucide-react';
 import CheckBox from "../../components/checkbox/CheckBox"
+import { TitleTab } from "../../components/TitleTab.js"
 
 
 const Weather = () => {
-
+    TitleTab("Health Advice Group | Weather")
     const [weather, setWeather] = useState([])
     const [currentSlide, setCurrentslide] = useState(0)
     const long = useRef(null)
