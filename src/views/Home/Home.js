@@ -102,10 +102,6 @@ const Home = () => {
       {user ? <h1>Welcome {user.name}</h1> : null}
 
 
-
-
-
-
       <div className="current-cont">
 
         <div className="weatherMain-cont">
