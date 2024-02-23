@@ -54,7 +54,7 @@ const LoginForm = () => {
             
             
         }).catch((error) =>{
-            alert(JSON.stringify(error?.response?.data.detail))
+            console.log(JSON.stringify(error?.response?.data.detail))
         })
 
     }

@@ -25,10 +25,17 @@ function App() {
   }
 
   useEffect(()=>{
-    const dataSent = {
-      letConnect : true
+    try{
+      const dataSent = {
+        letConnect : true
+      }
+      const connectionValidation = axios.post("http://localhost:8000/users/connection",dataSent)
+    }catch{
+      alert("Not connected to server,Please connect to server before moving forward")
     }
-    const connectionValidation = axios.post("http://localhost:8000/users/connection",dataSent)
+
+    
+    
   },[])
   
   
