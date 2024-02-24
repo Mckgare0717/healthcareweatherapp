@@ -5,17 +5,15 @@ import { useState, useRef, useEffect } from "react"
 import axios from "axios"
 import { Droplets, Thermometer,Sun } from 'lucide-react';
 import { Search } from 'lucide-react';
-import CheckBox from "../../components/checkbox/CheckBox"
 import { TitleTab } from "../../components/TitleTab.js"
 
 
 const Weather = () => {
     TitleTab("Health Advice Group | Weather")
-    const [weather, setWeather] = useState([])
+    
     const [currentSlide, setCurrentslide] = useState(0)
     const long = useRef(null)
     const lat = useRef(null)
-    const [forecast, setForecast] = useState([])
     const [error, setError] = useState(null)
     const [input, setInput] = useState("")
     const [fiveForecasts,setFiveForecasts] = useState([])
@@ -55,9 +53,8 @@ const Weather = () => {
         await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat.current}&lon=${long.current}&exclude="hourly,minutely"&appid=${API_KEY}&units=${units}`).then((res) => {
             
         
-            setForecast(res.data.daily)
+            
             setFiveForecasts(res.data.daily)
-            setWeather(res.data)
             setLoading(false)
             
         }).catch((error) => {
@@ -99,11 +96,13 @@ const Weather = () => {
               },
               (error) => {
                 setError("Error getting location: " + error.message);
+                alert(error)
                 setLoading(false)
               }
             );
           } else {
             setError("Geolocation is not supported by your browser");
+            alert(error)
             setLoading(false)
           }
         };
