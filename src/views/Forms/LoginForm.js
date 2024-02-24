@@ -22,7 +22,7 @@ const LoginForm = () => {
             email:email,
             password:password
         } 
-        axios.post("http://localhost:8000/users/login", sendData).then((res)=>{
+        axios.post("https://healthadvicebackend.onrender.com/users/login", sendData).then((res)=>{
             setUser(res.data)
             setToken(res.data.access_token)
             localStorage.setItem("token",res.data.access_token)
@@ -44,7 +44,7 @@ const LoginForm = () => {
             password:password,
             name:name
         } 
-        axios.post("http://localhost:8000/users/register", sendData).then((res)=>{
+        axios.post("https://healthadvicebackend.onrender.com/users/register", sendData).then((res)=>{
             setUser(res.data)
             setToken(res.data.access_token)
             alert("new user registered")

@@ -29,7 +29,7 @@ function App() {
       const dataSent = {
         letConnect : true
       }
-      const connectionValidation = axios.post("http://localhost:8000/users/connection",dataSent)
+      const connectionValidation = axios.post("https://healthadvicebackend.onrender.com/users/connection",dataSent)
     }catch{
       alert("Not connected to server,Please connect to server before moving forward")
     }
