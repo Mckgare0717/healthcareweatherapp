@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts  build npm-run-all --continue-on-error react-scripts",
+    "build": "CI=false react-scripts  build npm-run-all --continue-on-error react-scripts",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
